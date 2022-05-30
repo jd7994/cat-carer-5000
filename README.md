@@ -3,7 +3,7 @@
 
 > "The smallest feline is a masterpiece"
 >  _-Leonardo Da Vinci_
-----
+
 ### User Stories
 
 1. As someone with cats and access to the Cat-Carer, \
