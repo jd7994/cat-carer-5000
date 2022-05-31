@@ -7,7 +7,7 @@
 Index:
 
 <details>
-<summary>### User Stories</summary>
+<summary> ###User Stories</summary>
 
 1. As someone with cats and access to the Cat-Carer, \
 I want to record details of my cats,\
