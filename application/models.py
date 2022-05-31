@@ -1,7 +1,7 @@
 from application import db
 from flask import Flask
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateField, SubmitField, SelectField, BooleanField
+from wtforms import StringField, SubmitField, SelectField, BooleanField, IntegerField
 
 class Cats(db.Model):
     cat_id = db.Column(db.Integer, primary_key=True)
@@ -10,13 +10,8 @@ class Cats(db.Model):
     fur_colour = db.Column(db.String(20))
     temprament = db.Column(db.String(20))
     approx_age = db.Column(db.Integer)
-    fav_food = db.Column(db.Integer, db.ForeignKey('Food.food_id'))
+    fav_food = db.Column(db.Integer, db.ForeignKey('food.food_id'))
     liked_food = db.relationship('Food_Likes', backref='catsbr')
-    
-class Food_Likes(db.Model):
-     likes_id = db.Column(db.Integer, primary_key=True)
-     cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cat_id'))
-     food_id = db.Column('food_id', db.Integer, db.ForeignKey('food_id'))
      
 class Food(db.Model):
     food_id = db.Column(db.Integer, primary_key=True)
@@ -26,13 +21,26 @@ class Food(db.Model):
     cats_faves = db.relationship('Cats', backref='fav_foodbr')
     liked_by = db.relationship('Food_Likes', backref='foodbr')
 
+class Food_Likes(db.Model):
+     likes_id = db.Column(db.Integer, primary_key=True)
+     cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cats.cat_id'))
+     food_id = db.Column('food_id', db.Integer, db.ForeignKey('food.food_id'))
 
 
+class CatForm(FlaskForm):
+    cat_name = StringField('What is your new cat\'s name?')
+    fur_type = SelectField('What type of fur do they have?', choices=[
+        ("Shorthair", "Shorthair"),
+        ("Longhair", "Longhair"), 
+        ("Hairless", "Hairless")
+    ])
+    fur_colour = StringField('Fur Colour:')
+    temprament = StringField('Typical Temprament:')
+    approx_age = IntegerField('Approximate age:')
+    fav_food = SelectField('Favourite food:') #we have to populate this using a for loop and then form.fav_food.choices.append
+    #liked_food will be a seperate page
+    submit = SubmitField('Done!')
 
-
-
-
-#class ItemForm(FlaskForm):
 #    task_name = StringField('Task Name:')
 #    importance = SelectField('Importance:', choices=[
 #        ("Very Important", "Very Important"),
@@ -44,6 +52,4 @@ class Food(db.Model):
 #    done = BooleanField('Check when completed!')
 #    submit = SubmitField('Submit Task!')
 
-
-
-
+#class FoodForm(FlaskForm):
