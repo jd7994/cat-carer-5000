@@ -2,6 +2,72 @@
     {% extends header.html %}
     {% block body %}
     <body>
+        <h3>Here are the cats currently in your care:</h3>
+        {% if len(all_cats) == 0 %}
+    <p>You're not looking after any cats right now!</p>
+    <div>
+        <p>Maybe you'd like to <a href='{{url_for("add_cat")}}'> add a cat? </a></p>
+    </div>
+    {% else %}
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Fur Type</th>
+            <th>Fur Colour</th>
+            <th>Temprament</th>
+            <th>Approximate Age</th>
+            <th>Favourite Food</th>
+            <th>Other Liked Food</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for cat in all_cats %}
+          <tr>
+            <td>{{cat.cat_name}}</td>
+            <td>{{cat.fur_type}}</td>
+            <td>{{cat.fur_colour}}</td>
+            <td>{{cat.temprament}}</td>
+            <td>{{cat.approx_age}}</td>
+            <td>{{cat.fav_food}}</td>
+            <td><!--Add link to display all liked food --></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+       </table>
+    {% endif %}
     </body>
     {% endblock body %}
 </html>
+
+<!-- 
+<html>
+    <body>{% extends 'header.html' %}
+    {% block body %}
+    <p>Here's what you've got on your list:</p>
+    {% if len(list_items) == 0 %}
+    <p>Nothing!</p>
+    {% else %}
+    {% for imp_stat in list_var %}
+    {% for item in list_items %}
+    {% if not item.done and item.importance == imp_stat %}
+    <p>{{ item.task_name }} | {{ item.importance }} | {{ item.est_completion }} | {{ 'Done' if item.done else 'Not Yet Done' }} </p> <a href="update/{{item.id}}"> Edit </a> <a href="delete/{{item.id}}"> Delete </a>  
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    <div>
+    <h3> Projects Completed </h3>
+    {% for imp_stat in list_var %}
+    {% for item in list_items %}
+    {% if item.done and item.importance == imp_stat %}
+    <p>{{ item.task_name }} | {{ item.importance }} | {{ item.est_completion }} | {{ 'Done' if item.done else 'Not Yet Done' }} </p> <a href="update/{{item.id}}"> Edit </a> <a href="delete/{{item.id}}"> Delete </a></p>
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    <div>
+        <a href="/new"><h4>Want to add a new item?</h4></a>
+    </div>
+    {% endblock body %}
+</body>
+</html> -->

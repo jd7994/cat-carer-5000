@@ -8,8 +8,8 @@ from wtforms import StringField, SubmitField
 
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
-#def home():
- #   return render_template('home.html', len = len, list_items = Tasks.query.all(), list_var = ["Very Important", "Important", "Quite Important", "Not So Important"])
+def home():
+   return render_template('home.html', len = len, all_cats = Cats.query.all())
 
 
 # @app.route('/new', methods=['GET', 'POST'])
