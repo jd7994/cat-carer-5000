@@ -14,7 +14,7 @@ def home():
 @app.route('/add_cat', methods=['GET', 'POST'])
 def add_cat():
     form = CatForm()
-    if form.validate_on_submit():
+    if form.validate_on_submit(): # populating food choices with what is in the food database
         foods = Food.query.all()
         for food in foods:
             form.fav_food.choices.append(
