@@ -22,9 +22,9 @@ class Food(db.Model):
     liked_by = db.relationship('Food_Likes', backref='foodbr')
 
 class Food_Likes(db.Model):
-     likes_id = db.Column(db.Integer, primary_key=True)
-     cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cats.cat_id'))
-     food_id = db.Column('food_id', db.Integer, db.ForeignKey('food.food_id'))
+    likes_id = db.Column(db.Integer, primary_key=True)
+    cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cats.cat_id'))
+    food_id = db.Column('food_id', db.Integer, db.ForeignKey('food.food_id'))
 
 
 class CatForm(FlaskForm):
@@ -37,13 +37,13 @@ class CatForm(FlaskForm):
     fur_colour = StringField('Fur Colour:')
     temprament = StringField('Typical Temprament:')
     approx_age = IntegerField('Approximate age:')
-    fav_food = SelectField('Favourite food:') #we have to populate this using a for loop and then form.fav_food.choices.append
+    fav_food = SelectField('Favourite food:', choices=[("Unknown", "Unknown")]) #we have to populate this using a for loop and then form.fav_food.choices.append
     #liked_food will be a seperate page
     submit = SubmitField('Done!')
 
 class FoodForm(FlaskForm):
     food = StringField("What is this food item?")
-    flavour_prof = SelectField("How would you say it tastes?" choices=[
+    flavour_prof = SelectField("How would you say it tastes?", choices=[
         ("Salty", "Salty"),
         ("Sweet", "Sweet"),
         ("Spicy", "Spicy"),
@@ -52,10 +52,11 @@ class FoodForm(FlaskForm):
         ("Disgusting!", "Disgusting!")
     ])
     stock = IntegerField("How many do you have?")
+    submit = SubmitField('Done!')
 
 class Food_likes_form(FlaskForm):
-    all_food = Food.query.all()
+    all_food = list(Food.query.all())
     for food in all_food:
-        locals()[food] = BooleanField(f"{food}")
+        locals()[food.food] = BooleanField(food.food)
     submit = SubmitField("Finished!")
     

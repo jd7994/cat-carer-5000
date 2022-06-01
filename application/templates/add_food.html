@@ -6,17 +6,13 @@
         <div class="form"></div>
         <form method="POST" action="">
           {{ form.hidden_tag() }}
-          {{form.food.label}} {{form.cat_name}}
+          {{ form.food.label }} {{ form.food }}
           <br>
-          {{form.fur_type.label}} {{form.fur_type}}
+          {{ form.flavour_prof.label }} {{ form.flavour_prof }}
           <br>
-          {{form.fur_colour.label}} {{form.fur_colour}}
+          {{ form.stock.label }} {{ form.stock }}
           <br>
-          {{form.temprament.label}} {{form.temprament}}
-          <br>
-          {{form.fav_food.label}} {{form.fav_food}}
-          <br>
-          {{form.submit.label}} {{form.submit}}
+          {{ form.submit }}
         </form>
       </p>
     </body>
