@@ -2,7 +2,17 @@
     {% extends 'top.html' %}
     {% block body %}
     <body>
-  <!-- ADD FORM HERE PLEASE :) -->
+      <p>
+        <div class="form"></div>
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          {% for field in fields %}
+          {{ form.field.label }} {{ form.field }}
+          {% endfor %}
+          {{ form.submit.label }} {{ form.submit }}
+          
+        </form>
+      </p>
     </body>
     {% endblock body %}
 </html>

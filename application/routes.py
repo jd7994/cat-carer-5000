@@ -4,8 +4,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 
-
-
 @app.route('/', methods=['GET'])
 @app.route('/home', methods=['GET'])
 def home():
@@ -30,52 +28,46 @@ def add_cat():
         )
         db.session.add(cat)
         db.session.commit()
-        return redurect(url_for('cat_liked_food'))
+        return redirect(url_for('cat_liked_food'))
     return render_template('add_cat.html', all_cats = Cats.query.all())
 
 @app.route('/add_food', methods=['GET', 'POST'])
 def add_food():
+    form = FoodForm()
+    if form.validate_on_submit():
+        food = Food(
+            food = form.food.data,
+            flavour_prof = form.flavour_prof.data,
+            stock = form.stock.data
+        )
    return render_template('add_food.html')
 
+@app.route('/added', methods=['GET'])
+def added():
+   return render_template('added.html')
 
-# @app.route('/new', methods=['GET', 'POST'])
-# def new_item():
-#     form = ItemForm()
-#     if form.validate_on_submit():
-#         item = Tasks(
-#             task_name = form.task_name.data,
-#             importance = form.importance.data,
-#             est_completion = form.est_completion.data,
-#             done = form.done.data            
-#         )
-#         db.session.add(item)
-#         db.session.commit()
-#         return redirect(url_for('home')) 
-#     return render_template('new.html', form=form)   
+@app.route('/cat_liked_food/<int:id>', methods=['GET', 'POST'])
+def cat_liked_food(id):
+    form = Food_likes_form()
+    cat = Cats.query.get(id)
+    all_food = Food.query.all()
+    fields = []
+    for food in all_food:
+        fields.append(locals()[food])
+    cat_choices = []
+    if form.validate_on_submit():
+        for food in all_food:
+            if form.(locals()[food]).data == True
+                cat_choices.append(food.id)
 
-# @app.route('/update/<int:id>', methods=['GET', 'POST'])
-# def update_item(id):
-#     task = Tasks.query.get(id)
-#     form = ItemForm(
-#         task_name = task.task_name,
-#         importance = task.importance,
-#         est_completion = task.est_completion,
-#         done = task.done
-#     )
-#     if form.validate_on_submit():
-#         item = Tasks.query.get(id)
-#         item.task_name = form.task_name.data
-#         item.importance = form.importance.data
-#         item.est_completion = form.est_completion.data 
-#         item.done = form.done.data
-
-#         db.session.commit()
-#         return redirect(url_for('/home')) 
-#     return render_template('new.html', form=form)   
-
-# @app.route('/delete/<int:id>', methods=['GET'])
-# def delete_item(id): 
-#     item = Tasks.query.get(id)
-#     db.session.delete(item)    
-#     db.session.commit() 
-#     return render_template('delete.html', item=item)
+        for choice in cat_choices:
+            new_like = Food_Likes(
+            Food_Likes.cat_id = cat.cat_id
+            Food_likes.food_id = cat_choices
+            )
+            db.session.add(new_like)
+        db.session.commit()
+        cat_choices = []
+        return redirect(url_for_('home'))
+   
+   return render_template('cat_food.html', fields)

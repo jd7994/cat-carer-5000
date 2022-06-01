@@ -41,15 +41,21 @@ class CatForm(FlaskForm):
     #liked_food will be a seperate page
     submit = SubmitField('Done!')
 
-#    task_name = StringField('Task Name:')
-#    importance = SelectField('Importance:', choices=[
-#        ("Very Important", "Very Important"),
-#        ("Important", "Important"),
-#        ("Quite Important", "Quite Important"),
-#        ("Not So Important", "Not So Important")
-#    ])
-#    est_completion = StringField('When do we hope this will be done?')
-#    done = BooleanField('Check when completed!')
-#    submit = SubmitField('Submit Task!')
+class FoodForm(FlaskForm):
+    food = StringField("What is this food item?")
+    flavour_prof = SelectField("How would you say it tastes?" choices=[
+        ("Salty", "Salty"),
+        ("Sweet", "Sweet"),
+        ("Spicy", "Spicy"),
+        ("Acidic", "Acidic"),
+        ("Umami", "Umami"),
+        ("Disgusting!", "Disgusting!")
+    ])
+    stock = IntegerField("How many do you have?")
 
-#class FoodForm(FlaskForm):
+class Food_likes_form(FlaskForm):
+    all_food = Food.query.all()
+    for food in all_food:
+        locals()[food] = BooleanField(f"{food}")
+    submit = SubmitField("Finished!")
+    
