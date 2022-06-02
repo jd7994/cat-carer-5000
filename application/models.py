@@ -60,3 +60,10 @@ class Food_likes_form(FlaskForm):
         locals()[food.food] = BooleanField(food.food)
     submit = SubmitField("Finished!")
     
+"""""
+so
+if you add a new food item and then cause this form to be used, the form freaks out
+because the new food item isn't on there
+we need to find a way to reinitialise the form each time it's called, or just before it's called
+
+"""""

@@ -6,11 +6,12 @@
         <div class="form"></div>
         <form method="POST" action="">
           {{ form.hidden_tag() }}
-          {% for food_name in fields %}
-            {{ form.food_name.label }} {{ form.food_name }}
+          {% for field in fields %}
+          {{ field.label }} {{ field }}
           {% endfor %}
-          {{ form.submit.label }} {{ form.submit }}
-          
+          <div>
+            {{ form.submit }}
+          </div>
         </form>
       </p>
     </body>

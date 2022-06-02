@@ -52,26 +52,57 @@ def added():
 @app.route('/cat_liked_food/<int:id>', methods=['GET', 'POST'])
 def cat_liked_food(id):
     form = Food_likes_form()
+    prev_likes = Food_Likes.query.filter_by(cat_id=id).all()
+    for likes in prev_likes:
+        db.session.delete(likes)
+    db.session.commit()
     cat = Cats.query.get(id)
     all_food = Food.query.all()
-    fields = []
-    for food in all_food: # getattr() pulls up the object and then the attribute of that object
-        this = getattr(food, 'food')
-        fields.append(this)
     cat_choices = []
     if form.validate_on_submit():
         for food in all_food:
-            if form.field.data == True:
-                cat_choices.append(food.id)
-
+            cat_choices.append(food.food) if getattr(form, food.food).data else...
         for choice in cat_choices:
             new_like = Food_Likes(
                 cat_id = cat.cat_id,
                 food_id = choice
             )
             db.session.add(new_like)
+        db.session.commit()    
+        return render_template('added_cat.html')
+    return render_template('cat_liked_food.html', form = form, fields = [getattr(form, food.food) for food in all_food]) 
+
+@app.route('/delete_cat/<int:id>', methods=['GET'])
+def delete(id):
+    cat_to_delete = Cats.query.get(id)
+    db.session.delete(cat_to_delete)
+    db.session.commit()
+    return render_template('delete_cat.html')
+
+@app.route('/edit_cat/<int:id>', methods=['GET', 'POST'])
+def edit_cat(id):
+    cat = Cats.query.get(id)
+    form = CatForm(
+        cat_name = cat.cat_name,
+        fur_type = cat.fur_type,
+        fur_colour = cat.fur_colour,
+        temprament = cat.temprament,
+        approx_age = cat.approx_age,
+        fav_food = cat.fav_food
+    )
+    foods = Food.query.all()
+    for food in foods:
+        form.fav_food.choices.append(
+            (food.food_id, f"{food.food}")
+        )
+    if form.validate_on_submit():
+        cat.cat_name = form.cat_name.data
+        cat.fur_type = form.fur_type.data
+        cat.fur_colour = form.fur_colour.data
+        cat.temprament = form.temprament.data
+        cat.approx_age = form.approx_age.data
+        cat.fav_food = form.fav_food.data
+
         db.session.commit()
-        cat_choices = []
-        return redirect(url_for_('home'))
-   
-    return render_template('cat_liked_food.html', form = form, fields = fields)
+        return redirect('/cat_liked_food/' + str(cat.cat_id)) 
+    return render_template('add_cat.html', form=form)   
