@@ -44,11 +44,13 @@ We can now construct a plan for functionality of the project. It's clear from th
 Progress throughout the project will be tracked using the Jira Board, made for agile development. Different epics have been created based on different phases of the development, extrapolated from the above Use Cases and broken into tasks to facilitate the design of a project like this. 
 
 #***INSERT PICTURE OF JIRA BOARD***
+![jira_board](https://user-images.githubusercontent.com/100293943/171617985-7344a58e-e9a2-4e25-be84-92d09cd47587.jpg)
 
 ##Design
 I created models for the database components of the project by examnining the user stories and deciding upon the minimum requirements for the project as a whole. Below is an Entity Relationship Model I decided upon, in the UML format: 
 
-#***INSERT PICTURE OF DATABASE PLAN***
+#***INSERT PICTURE OF DATABASE PLAN***![DB_RM(relationship model)](https://user-images.githubusercontent.com/100293943/171618009-46e888ed-f492-44c1-a055-745cbabc3846.png)
+
 
 While designing the model, I realised quickly that implementing both a foods liked and foods disliked field would be complicated, both in terms of back-end and front facing UI - already we're looking at a many to many relationship, so doubling up that relationship seemed like something that could potentially be added to the app later if there was time. Using MoSCoW principles, I decided specifying what the cats liked was a Must and what the cats did not like was a Could. I also realised that I'd be looking at another many to many relationship including the medical care information for the cats, so decided to simplify. Instead of a full care app, the cat-carer-5000 will aim specifically at feeding the cats food that they like the most. Given the time constraints of the project, that seemed like a more reasonable aim. Other aspects of care could be added later. 
 
@@ -60,9 +62,14 @@ With these adjustments made to the project, I've focused and redefined and am re
 ##Risk Assessment
 With a small project like this handling non-sensitive data, the risks are not particularly severe, but a risk assessment has been carried out, the results of which are below.
 
-#**INSERT RISK ASSESSMENT**
+#**INSERT RISK ASSESSMENT**[Risk Assessment - Sheet1.pdf](https://github.com/jd7994/cat-carer-5000/files/8823228/Risk.Assessment.-.Sheet1.pdf)
+
 
 Another way the project could be extended in the future would be add the funcionality to login as a particular user and access only your own files. As the app stands at the moment, it's only suitable for one user, as all information will be available to anyone who uses it. 
 
+Here's a fun error I keep running into:
+![error2](https://user-images.githubusercontent.com/100293943/171618127-a9f79a35-1b9f-4212-b2ca-36ab5f8f1bf8.jpg)
+![error3](https://user-images.githubusercontent.com/100293943/171618132-ab510139-4c62-46f6-89e1-c22767d91a41.jpg)
+![error1](https://user-images.githubusercontent.com/100293943/171618135-cc8fcb75-590e-4502-bf80-dc004196dc86.jpg)
 
 
