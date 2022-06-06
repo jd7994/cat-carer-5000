@@ -11,7 +11,6 @@ class Cats(db.Model):
     temprament = db.Column(db.String(20))
     approx_age = db.Column(db.Integer)
     fav_food = db.Column(db.Integer, db.ForeignKey('food.food_id'))
-    liked_food = db.relationship('Food_Likes', backref='catsbr')
      
 class Food(db.Model):
     food_id = db.Column(db.Integer, primary_key=True)
@@ -19,13 +18,6 @@ class Food(db.Model):
     flavour_prof = db.Column(db.String(20))
     stock = db.Column(db.Integer, default=0)
     cats_faves = db.relationship('Cats', backref='fav_foodbr')
-    liked_by = db.relationship('Food_Likes', backref='foodbr')
-
-class Food_Likes(db.Model):
-    likes_id = db.Column(db.Integer, primary_key=True)
-    cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cats.cat_id'))
-    food_id = db.Column('food_id', db.Integer, db.ForeignKey('food.food_id'))
-
 
 class CatForm(FlaskForm):
     cat_name = StringField('What is your new cat\'s name?')
@@ -38,7 +30,6 @@ class CatForm(FlaskForm):
     temprament = StringField('Typical Temprament:')
     approx_age = IntegerField('Approximate age:')
     fav_food = SelectField('Favourite food:', choices=[("Unknown", "Unknown")]) #we have to populate this using a for loop and then form.fav_food.choices.append
-    #liked_food will be a seperate page
     submit = SubmitField('Done!')
 
 class FoodForm(FlaskForm):
@@ -53,17 +44,3 @@ class FoodForm(FlaskForm):
     ])
     stock = IntegerField("How many do you have?")
     submit = SubmitField('Done!')
-
-class Food_likes_form(FlaskForm):
-    all_food = list(Food.query.all())
-    for food in all_food:
-        locals()[food.food] = BooleanField(food.food)
-    submit = SubmitField("Finished!")
-    
-"""""
-so
-if you add a new food item and then cause this form to be used, the form freaks out
-because the new food item isn't on there
-we need to find a way to reinitialise the form each time it's called, or just before it's called
-
-"""""

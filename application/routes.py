@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import Cats, CatForm, FoodForm, Food_likes_form, Food, Food_Likes
+from application.models import Cats, CatForm, FoodForm, Food
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -28,7 +28,7 @@ def add_cat():
         )
         db.session.add(cat)
         db.session.commit()
-        return redirect('cat_liked_food/' + str(cat.cat_id))
+        return render_template('added_cat.html')
     return render_template('add_cat.html', form = form, all_cats = Cats.query.all())
 
 @app.route('/add_food', methods=['GET', 'POST'])
@@ -48,29 +48,6 @@ def add_food():
 @app.route('/added', methods=['GET'])
 def added():
     return render_template('added.html')
-
-@app.route('/cat_liked_food/<int:id>', methods=['GET', 'POST'])
-def cat_liked_food(id):
-    form = Food_likes_form()
-    prev_likes = Food_Likes.query.filter_by(cat_id=id).all()
-    for likes in prev_likes:
-        db.session.delete(likes)
-    db.session.commit()
-    cat = Cats.query.get(id)
-    all_food = Food.query.all()
-    cat_choices = []
-    if form.validate_on_submit():
-        for food in all_food:
-            cat_choices.append(food.food) if getattr(form, food.food).data else...
-        for choice in cat_choices:
-            new_like = Food_Likes(
-                cat_id = cat.cat_id,
-                food_id = choice
-            )
-            db.session.add(new_like)
-        db.session.commit()    
-        return render_template('added_cat.html')
-    return render_template('cat_liked_food.html', form = form, fields = [getattr(form, food.food) for food in all_food]) 
 
 @app.route('/delete_cat/<int:id>', methods=['GET'])
 def delete(id):
@@ -104,5 +81,5 @@ def edit_cat(id):
         cat.fav_food = form.fav_food.data
 
         db.session.commit()
-        return redirect('/cat_liked_food/' + str(cat.cat_id)) 
+        return render_template('added_cat.html')
     return render_template('add_cat.html', form=form)   
