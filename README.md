@@ -78,3 +78,4 @@ Here's the error I keep running into:
 
 
 Ultimately, for the timeframe of the project I made the decision to simplify again. The app will now be planned to only support recording a cat's single favourite food - the many to many relationship for liked food is very interesting, and hopefully could be added to the project later. 
+
