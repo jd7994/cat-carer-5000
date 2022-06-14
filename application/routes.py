@@ -1,6 +1,6 @@
 from application import app, db
-from application.models import Cats,  Food
-from application.forms import CatForm
+from application.models import Cats,  Food, Food_Likes
+from application.forms import CatForm, Food_Likes_Form
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -29,7 +29,7 @@ def add_cat():
         )
         db.session.add(cat)
         db.session.commit()
-        return render_template('added_cat.html')
+        return redirect('cat_liked_food/' + str(cat.cat_id))
     return render_template('add_cat.html', form = form, all_cats = Cats.query.all())
 
 # @app.route('/add_food', methods=['GET', 'POST'])
@@ -49,6 +49,43 @@ def add_cat():
 @app.route('/added', methods=['GET'])
 def added():
     return render_template('added.html')
+
+@app.route('/cat_liked_food/<int:id>', methods=['GET', 'POST'])
+def cat_liked_food(id):
+    form = Food_Likes_Form()
+    prev_likes = Food_Likes.query.filter_by(cat_id=id).all()
+    for likes in prev_likes:
+        db.session.delete(likes)
+    db.session.commit()
+    cat = Cats.query.get(id)
+    all_food = Food.query.all()
+    cat_choices = []
+    if form.validate_on_submit():
+        if (form.caul.data):
+            cat_choices.append(1)
+        if (form.pie.data):
+            cat_choices.append(2)
+        if (form.spid.data):
+            cat_choices.append(3)
+        if (form.chick.data):
+            cat_choices.append(4)
+        if (form.oink.data):
+            cat_choices.append(5)
+        if (form.pea.data):
+            cat_choices.append(6)
+        if (form.cake.data):
+            cat_choices.append(7)
+        if (form.cream.data):
+            cat_choices.append(8)    
+        for choice in cat_choices:
+            new_like = Food_Likes(
+                cat_id = cat.cat_id,
+                food_id = choice
+            )
+            db.session.add(new_like)
+        db.session.commit()    
+        return render_template('added_cat.html')
+    return render_template('cat_liked_food.html', form = form) 
 
 @app.route('/delete_cat/<int:id>', methods=['GET'])
 def delete(id):
@@ -84,3 +121,12 @@ def edit_cat(id):
         db.session.commit()
         return render_template('added_cat.html')
     return render_template('add_cat.html', form=form)   
+
+@app.route('/likes/<int:id>', methods=['GET'])
+def likes(id):
+    cat = Cats.query.get(id)
+    likes = []
+    list = Food_Likes.query.filter_by(cat_id=id).all()
+    for item in list:
+        likes.append(item.foodbr.food)
+    return render_template('likes.html', likes = likes, cat = cat)

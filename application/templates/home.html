@@ -12,7 +12,7 @@
     <table>
         <thead>
           <tr>
-            <th>Name</th>
+            <th> Name</th>
             <th>| Fur Type</th>
             <th>| Fur Colour</th>
             <th>| Temprament</th>
@@ -23,7 +23,7 @@
         <tbody>
             {% for cat in all_cats %}
           <tr>
-            <td>{{cat.cat_name}}</td>
+            <td><a href="likes/{{ cat.cat_id }}">{{cat.cat_name}}</td>
             <td>{{cat.fur_type}}</td>
             <td>{{cat.fur_colour}}</td>
             <td>{{cat.temprament}}</td>

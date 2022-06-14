@@ -10,15 +10,20 @@ class Cats(db.Model):
     temprament = db.Column(db.String(20))
     approx_age = db.Column(db.Integer)
     fav_food = db.Column(db.Integer, db.ForeignKey('food.food_id'))
-     
+    liked_food = db.relationship('Food_Likes', backref='catsbr')
+
 class Food(db.Model):
     food_id = db.Column(db.Integer, primary_key=True)
     food = db.Column(db.String(20), nullable=False)
     flavour_prof = db.Column(db.String(20))
     stock = db.Column(db.Integer, default=0)
     cats_faves = db.relationship('Cats', backref='fav_foodbr')
-
-
+    liked_by = db.relationship('Food_Likes', backref='foodbr')
+    
+class Food_Likes(db.Model):
+    likes_id = db.Column(db.Integer, primary_key=True)
+    cat_id = db.Column('cat_id', db.Integer, db.ForeignKey('cats.cat_id'))
+    food_id = db.Column('food_id', db.Integer, db.ForeignKey('food.food_id'))
 
 # class FoodForm(FlaskForm):
 #     food = StringField("What is this food item?")
