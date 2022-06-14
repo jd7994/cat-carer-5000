@@ -32,15 +32,15 @@ class CatForm(FlaskForm):
     fav_food = SelectField('Favourite food:', choices=[("Unknown", "Unknown")]) #we have to populate this using a for loop and then form.fav_food.choices.append
     submit = SubmitField('Done!')
 
-class FoodForm(FlaskForm):
-    food = StringField("What is this food item?")
-    flavour_prof = SelectField("How would you say it tastes?", choices=[
-        ("Salty", "Salty"),
-        ("Sweet", "Sweet"),
-        ("Spicy", "Spicy"),
-        ("Acidic", "Acidic"),
-        ("Umami", "Umami"),
-        ("Disgusting!", "Disgusting!")
-    ])
-    stock = IntegerField("How many do you have?")
-    submit = SubmitField('Done!')
+# class FoodForm(FlaskForm):
+#     food = StringField("What is this food item?")
+#     flavour_prof = SelectField("How would you say it tastes?", choices=[
+#         ("Salty", "Salty"),
+#         ("Sweet", "Sweet"),
+#         ("Spicy", "Spicy"),
+#         ("Acidic", "Acidic"),
+#         ("Umami", "Umami"),
+#         ("Disgusting!", "Disgusting!")
+#     ])
+#     stock = IntegerField("How many do you have?")
+#     submit = SubmitField('Done!')

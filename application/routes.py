@@ -1,5 +1,5 @@
 from application import app, db
-from application.models import Cats, CatForm, FoodForm, Food
+from application.models import Cats, CatForm,  Food
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
@@ -31,19 +31,19 @@ def add_cat():
         return render_template('added_cat.html')
     return render_template('add_cat.html', form = form, all_cats = Cats.query.all())
 
-@app.route('/add_food', methods=['GET', 'POST'])
-def add_food():
-    form = FoodForm()
-    if form.validate_on_submit():
-        food = Food(
-            food = form.food.data,
-            flavour_prof = form.flavour_prof.data,
-            stock = form.stock.data
-        )
-        db.session.add(food)
-        db.session.commit()
-        return redirect(url_for('added'))
-    return render_template('add_food.html', form = form)
+# @app.route('/add_food', methods=['GET', 'POST'])
+# def add_food():
+#     form = FoodForm()
+#     if form.validate_on_submit():
+#         food = Food(
+#             food = form.food.data,
+#             flavour_prof = form.flavour_prof.data,
+#             stock = form.stock.data
+#         )
+#         db.session.add(food)
+#         db.session.commit()
+#         return redirect(url_for('added'))
+#     return render_template('add_food.html', form = form)
 
 @app.route('/added', methods=['GET'])
 def added():
