@@ -1,5 +1,6 @@
 from application import app, db
-from application.models import Cats, CatForm,  Food
+from application.models import Cats,  Food
+from application.forms import CatForm
 from flask import Flask, render_template, request, redirect, url_for
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
