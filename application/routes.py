@@ -109,8 +109,8 @@ def edit_cat(id):
 def likes(id):
     cat = Cats.query.get(id)
     likes = []
-    list = Food_Likes.query.filter_by(cat_id=id).all()
-    for item in list:
+    list1 = list(Food_Likes.query.filter_by(cat_id=id).all())
+    for item in list1:
         likes.append(item.foodbr.food)
     return render_template('likes.html', likes = likes, cat = cat)
 

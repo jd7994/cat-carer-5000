@@ -16,7 +16,8 @@ class TestBase(TestCase):
         db.create_all()
         test_food = Food(food = "A carrot")
         test_cat = Cats(cat_name="Jumbo-Puss, Pigeon Eater", fav_food=1, approx_age=41)
-        db.session.add_all([test_cat, test_food])
+        test_cat_likes = Food_Likes(cat_id = 1, food_id = 1)
+        db.session.add_all([test_cat, test_food, test_cat_likes])
         db.session.commit()
 
     def tearDown(self):
@@ -34,7 +35,8 @@ class TestView(TestBase):
 
     def test_likes(self):
         response = self.client.get(url_for('likes', id=1))
-        self.assert200(response)   
+        self.assert200(response)
+        self.assertIn(b"A carrot", response.data)
 
     def test_added(self):
         response = self.client.get(url_for('added_cat'))
