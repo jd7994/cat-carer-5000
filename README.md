@@ -49,9 +49,13 @@ So that I can know for sure my cats will be well fed.
 <details>
 <summary>From these stories, we can construct **acceptance criteria**:</summary>
 1. Given a user has access to the web app, when they enter details of their pet, then they can update a database with those details  
+  
 2. Given a user has access to the web app, when they access their pet details, then they can somehow indicate the foods that cat is fond of or dislikes  
-3. Given a user has access to the web app, when they access details of their pet, then they can record the medicinal or health needs of that specific pet.  
-4. Given a user has access to the web app, when they edit an entry of a requirement or a cat, that change will remain in the database and appear when called next  
+  
+3. Given a user has access to the web app, when they access details of their pet, then they can record the medicinal or health needs of that specific pet. 
+  
+4. Given a user has access to the web app, when they edit an entry of a requirement or a cat, that change will remain in the database and appear when called next
+  
 5. Given a user has access to the web app, they can easily adjust the app to show how much food they have, and whether that will satisfy their cats.   
 </details>
 ##Initial Planning
