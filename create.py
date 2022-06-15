@@ -5,43 +5,29 @@ db.drop_all()
 db.create_all()
 
 caul = Food(
-    food = "A Raw Cauliflower"
-)
-db.session.add(caul)
+    food = "A Raw Cauliflower")
 
 pie = Food(
-    food = "A Freshly Baked Pie"
-)
-db.session.add(pie
-)
+    food = "A Freshly Baked Pie")
+
 spid = Food(
-    food = "A Live, Wriggling Spider"
-)
-db.session.add(spid
-)
+    food = "A Live, Wriggling Spider")
+
 chick = Food(
-    food = "An Entire Roast Chicken"
-)
-db.session.add(chick)
+    food = "An Entire Roast Chicken")
 
 oink = Food(
-    food = "Bacon, Cooked or Raw"
-)
-db.session.add(oink)
+    food = "Bacon, Cooked or Raw")
 
 pea = Food(
-    food = "Frozen Peas"
-)
-db.session.add(pea
-)
+    food = "Frozen Peas")
+
 cake = Food(
-    food = "A Victoria Sponge"
-)
-db.session.add(cake)
+    food = "A Victoria Sponge")
 
 cream = Food(
-    food = "Fresh Cream"
-)
-db.session.add(cream)
+    food = "Fresh Cream")
+
+db.session.add_all([caul, pie, spid, chick, oink, pea, cake, cream])
 
 db.session.commit()

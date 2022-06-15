@@ -1,7 +1,7 @@
 from flask import url_for
 from flask_testing import TestCase
 from application import app, db
-from application.models import Cats, Food
+from application.models import Cats, Food, Food_Likes
 
 class TestBase(TestCase):
     def create_app(self):
@@ -14,9 +14,9 @@ class TestBase(TestCase):
 
     def setUp(self):
         db.create_all()
-        test_cat = Cats(cat_name="Jumbo-Puss, Pigeon Eater")
-        test_food = Food(food="A whole pigeon")
-        db.session.add(test_cat, test_food)
+        test_food = Food(food = "A carrot")
+        test_cat = Cats(cat_name="Jumbo-Puss, Pigeon Eater", fav_food=1, approx_age=41)
+        db.session.add_all([test_cat, test_food])
         db.session.commit()
 
     def tearDown(self):
@@ -26,51 +26,64 @@ class TestBase(TestCase):
 class TestView(TestBase):  
     def test_home_get(self):
         response = self.client.get(url_for('home'))
-        self.assertEqual(response.status_code, 200)
+        self.assert200(response)
 
     def test_add_cat(self):
         response = self.client.get(url_for('add_cat'))
-        self.assertEqual(response.status_code, 200)     
+        self.assert200(response)       
 
-    def test_add_food(self):
-        response = self.client.get(url_for('add_food'))
-        self.assertEqual(response.status_code, 200)
+    def test_likes(self):
+        response = self.client.get(url_for('likes', id=1))
+        self.assert200(response)   
 
     def test_added(self):
-        response = self.client.get(url_for('added'))
-        self.assertEqual(response.status_code, 200)    
-
+        response = self.client.get(url_for('added_cat'))
+        self.assert200(response)
 
 class TestAdd(TestBase):
     def test_add_cat(self):
         response=self.client.post(
             url_for('add_cat'), 
-            data = dict(cat_name="Big Susan"),
-            follow_redirects = True
-        )
-        self.assert200(response)
-        self.assertIn(b'Big Susan', response.data)
-
-    def test_add_food(self):
-        response=self.client.post(
-            url_for('add_food'),
-            data = dict(food="Carrot")
-        )
-        self.assert200(response)
-        self.assertIn(b'Carrot', response.data)
+            data = dict(cat_name="Big Susan", fur_type = "Shorthair", approx_age=40, fav_food=1))
+        self.assertEqual(response.status_code, 302)
+        cat = Cats.query.filter_by(cat_name="Big Susan").first()
+        assert cat.cat_id == 2
 
 class TestDelete(TestBase):
     def test_delete_cat(self):
-        url = str(url_for('delete')+"/0")
-        response = self.client.delete(
-            url,
-            data = dict(cat_name='Jumbo-Puss, Pigeon Eater')
+        response = self.client.get(
+            url_for('delete', id=1))
+        assert len(Cats.query.all()) == 0
+
+class TestFoodLikes(TestBase):
+    def test_cat_food_likes(self):
+        repsonse = self.client.post(
+            url_for('cat_liked_food', id = 1),
+            data = dict(caul = True, pie = True, spid = True, chick = True, oink = True, pea = True, cake = True, cream = True))
+        cat = Cats.query.first()
+        list1 = Food_Likes.query.filter_by(cat_id=cat.cat_id).all()
+        assert len(list1) == 8
+        self.assertEqual(repsonse.status_code, 302)
+
+        response = self.client.get(
+            url_for('cat_liked_food', id = 1)
         )
-        assert len(Cat.query.all()) == 0
-#I don't think we have functionality to delete food actually??? #todo
-    def test_delete_food(self):
-        response = self.client.delete(
-            url_for('delete_food'),
-            data = dict(food="A whole pigeon")
+        self.assert200(response)
+        cat = Cats.query.first()
+        list1 = Food_Likes.query.filter_by(cat_id=cat.cat_id).all()
+        assert len(list1) == 0
+
+class TestEditCat(TestBase):
+    def test_cat_edit(self):
+        response = self.client.get(
+            url_for('edit_cat', id = 1)
         )
-        assert len(Food.query.all()) == 0
+        self.assert200(response)    
+        response = self.client.post(
+            url_for('edit_cat', id = 1),
+            data = dict(cat_name="Jumbo-Puss", fur_type = "Shorthair", fav_food=1, approx_age=40)
+        )
+        self.assertEqual(response.status_code, 302)
+        cat = Cats.query.first()
+        assert cat.cat_name == "Jumbo-Puss"
+        assert cat.approx_age == 40

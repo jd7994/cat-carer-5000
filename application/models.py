@@ -15,8 +15,6 @@ class Cats(db.Model):
 class Food(db.Model):
     food_id = db.Column(db.Integer, primary_key=True)
     food = db.Column(db.String(20), nullable=False)
-    flavour_prof = db.Column(db.String(20))
-    stock = db.Column(db.Integer, default=0)
     cats_faves = db.relationship('Cats', backref='fav_foodbr')
     liked_by = db.relationship('Food_Likes', backref='foodbr')
     

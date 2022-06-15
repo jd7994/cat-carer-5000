@@ -32,23 +32,6 @@ def add_cat():
         return redirect('cat_liked_food/' + str(cat.cat_id))
     return render_template('add_cat.html', form = form, all_cats = Cats.query.all())
 
-# @app.route('/add_food', methods=['GET', 'POST'])
-# def add_food():
-#     form = FoodForm()
-#     if form.validate_on_submit():
-#         food = Food(
-#             food = form.food.data,
-#             flavour_prof = form.flavour_prof.data,
-#             stock = form.stock.data
-#         )
-#         db.session.add(food)
-#         db.session.commit()
-#         return redirect(url_for('added'))
-#     return render_template('add_food.html', form = form)
-
-@app.route('/added', methods=['GET'])
-def added():
-    return render_template('added.html')
 
 @app.route('/cat_liked_food/<int:id>', methods=['GET', 'POST'])
 def cat_liked_food(id):
@@ -60,7 +43,7 @@ def cat_liked_food(id):
     cat = Cats.query.get(id)
     all_food = Food.query.all()
     cat_choices = []
-    if form.validate_on_submit():
+    if request.method == "POST":
         if (form.caul.data):
             cat_choices.append(1)
         if (form.pie.data):
@@ -84,7 +67,7 @@ def cat_liked_food(id):
             )
             db.session.add(new_like)
         db.session.commit()    
-        return render_template('added_cat.html')
+        return redirect(url_for('added_cat'))
     return render_template('cat_liked_food.html', form = form) 
 
 @app.route('/delete_cat/<int:id>', methods=['GET'])
@@ -119,8 +102,8 @@ def edit_cat(id):
         cat.fav_food = form.fav_food.data
 
         db.session.commit()
-        return render_template('added_cat.html')
-    return render_template('add_cat.html', form=form)   
+        return redirect('/cat_liked_food/' + str(cat.cat_id))
+    return render_template('/add_cat.html', form=form)   
 
 @app.route('/likes/<int:id>', methods=['GET'])
 def likes(id):
@@ -130,3 +113,7 @@ def likes(id):
     for item in list:
         likes.append(item.foodbr.food)
     return render_template('likes.html', likes = likes, cat = cat)
+
+@app.route('/added_cat.html', methods=['GET'])
+def added_cat():
+    return render_template('added_cat.html')
