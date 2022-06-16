@@ -14,7 +14,7 @@ class Cats(db.Model):
 
 class Food(db.Model):
     food_id = db.Column(db.Integer, primary_key=True)
-    food = db.Column(db.String(20), nullable=False)
+    food = db.Column(db.String(30), nullable=False)
     cats_faves = db.relationship('Cats', backref='fav_foodbr')
     liked_by = db.relationship('Food_Likes', backref='foodbr')
     
