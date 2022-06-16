@@ -17,6 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''#!/bin/bash
+                    python3 create.py
                     sudo systemctl restart cat-carer'''
             }
         }
