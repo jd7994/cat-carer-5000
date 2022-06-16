@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('GetCode') {
+            steps {
+                git branch: 'main', changelog: false, poll: false, url: 'https://github.com/jd7994/cat-carer-5000.git'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh '''#!/bin/bash
+                    python3 -m venv venv
+                    source venv/bin/activate
+                    pip3 install -r requirements'''
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh '''#!/bin/bash
+                    sudo systemctl restart cat_carer'''
+            }
+        }
+    }
+}
