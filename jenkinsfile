@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''#!/bin/bash
-                    sudo systemctl restart cat_carer'''
+                    sudo systemctl restart cat-carer'''
             }
         }
     }
