@@ -13,7 +13,7 @@ class CatForm(FlaskForm):
     fur_colour = StringField('Fur Colour:')
     temprament = StringField('Typical Temprament:')
     approx_age = IntegerField('Approximate age:')
-    fav_food = SelectField('Favourite food:', choices=[("Unknown", "Unknown")]) #we have to populate this using a for loop and then form.fav_food.choices.append
+    fav_food = SelectField('Favourite food:', choices=[]) #we have to populate this using a for loop and then form.fav_food.choices.append
     submit = SubmitField('Done, let\'s go to more food!')
 
 class Food_Likes_Form(FlaskForm):
