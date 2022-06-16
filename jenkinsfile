@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh '''#!/bin/bash
-                    source -m venv venv
+                    source venv/bin/activate
                     python3 create.py
                     sudo systemctl restart cat-carer'''
             }
