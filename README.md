@@ -33,25 +33,15 @@
 ## User Stories
 <details>
 <summary>Click to show user stories</summary>
-1. As someone with cats and access to the Cat-Carer, \
-I want to record details of my cats,\
-So I can keep track of them all.
+1. As someone with cats and access to the Cat-Carer, \ I want to record details of my cats,\ So I can keep track of them all.
 
-2. As someone with cats and access to the Cat-Carer, \
-I want to record what food they like and do not like to eat\
-So I can provide them with food they like, and food isn't wasted
+2. As someone with cats and access to the Cat-Carer, \ I want to record what food they like and do not like to eat\ So I can provide them with food they like, and food isn't wasted
 
-3. As someone with cats and access to the Cat-Carer, \
-I want to record any special requirements my cats might have, \
-So that I can recall their needs and care for them better. 
+3. As someone with cats and access to the Cat-Carer, \ I want to record any special requirements my cats might have, \ So that I can recall their needs and care for them better. 
 
-4. As someone with cats and access to the Cat-Carer, \
-I want to be able to change my cat's details in case they change their minds (as cats often do),\
-So I can adjust to the whims of my cats as easily as possible. 
+4. As someone with cats and access to the Cat-Carer, \ I want to be able to change my cat's details in case they change their minds (as cats often do),\ So I can adjust to the whims of my cats as easily as possible. 
 
-5. As someone with cats and access to the Cat-Carer, 
-I want to be able to record the amount of pet food and other supplies I have at home, 
-So that I can know for sure my cats will be well fed.
+5. As someone with cats and access to the Cat-Carer, I want to be able to record the amount of pet food and other supplies I have at home, So that I can know for sure my cats will be well fed.
 
 </details>
 
