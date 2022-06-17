@@ -23,7 +23,7 @@ Index:
 
 -[Reflection](#reflection)
 
--[Final Summary](#final_summary)
+-[Final Thoughts](#final_thoughts)
 
 
 -----
@@ -89,7 +89,7 @@ With a small project like this handling non-sensitive data, the risks are not pa
 
 Another way the project could be extended in the future would be add the funcionality to login as a particular user and access only your own files. As the app stands at the moment, it's only suitable for one user, as all information will be available to anyone who uses it. 
 
-## Implementation and adaption
+## Implementation and Adaption
 ![routes models](https://user-images.githubusercontent.com/100293943/173849618-379e6533-a879-46e4-89bc-db18ec6ed669.jpg)
 (Above is the implementation in progress, below is the first version of the home page, displayed for the first time)
 ![First sign of life](https://user-images.githubusercontent.com/100293943/173846006-6bf44dc8-4263-4e11-8d0d-c918bd81fb90.jpg)
