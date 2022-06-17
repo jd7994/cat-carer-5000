@@ -33,6 +33,8 @@
 ## User Stories
 <details>
 <summary>Click to show user stories</summary>
+  
+  
 1. As someone with cats and access to the Cat-Carer, \ I want to record details of my cats,\ So I can keep track of them all.
 
 2. As someone with cats and access to the Cat-Carer, \ I want to record what food they like and do not like to eat\ So I can provide them with food they like, and food isn't wasted
