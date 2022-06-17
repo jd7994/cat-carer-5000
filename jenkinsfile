@@ -22,7 +22,7 @@ pipeline {
                     echo "deploying app..."
                     ssh jenkins@app-deploy 'sudo apt update'
                     ssh jenkins@app-deploy 'sudo apt install python3 python3-pip python3-venv -y'
-                    echo "cleaning system...
+                    echo "cleaning system..."
                     ssh jenkins@app-deploy 'rm * -r'
                     echo "repopulating system..."
                     scp -r * jenkins@app-deploy:
