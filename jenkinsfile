@@ -24,7 +24,7 @@ pipeline {
                     ssh jenkins@app-deploy 'sudo apt install python3 python3-pip python3-venv -y'
                     ssh jenkins@app-deploy 'python3 -m venv venv'
                     ssh jenkins@app-deploy 'source venv/bin/activate'
-                    scp -r cat-carer jenkins@app-deploy:
+                    scp -r * jenkins@app-deploy:
                     #ssh jenkins@app-deploy 'pip3 install -r requirements.txt'
                     #ssh jenkins@app-deploy 'python3 create.py'
                     #ssh jenkins@app-deploy 'sudo systemctl restart cat-carer'
