@@ -52,8 +52,9 @@ So that I can know for sure my cats will be well fed.
 
 </details>
 
+## Acceptance Criteria
 <details>
-<summary>From these stories, we can construct **acceptance criteria**:</summary>
+<summary>From these stories, we can construct acceptance criteria:</summary>
 1. Given a user has access to the web app, when they enter details of their pet, then they can update a database with those details  
   
 2. Given a user has access to the web app, when they access their pet details, then they can somehow indicate the foods that cat is fond of or dislikes  
