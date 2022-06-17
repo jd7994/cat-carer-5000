@@ -4,7 +4,8 @@
 > "The smallest feline is a masterpiece"
 >  _-Leonardo Da Vinci_
 
-Index:
+## Index:
+
 -[User Stories](#user-stories)
 
 -[Acceptance Criteria](#acceptance-criteria)
