@@ -66,7 +66,7 @@
 ## Initial Planning
 
 We can now construct a plan for functionality of the project. It's clear from the user stories that the app needs to be CRUD capable (create, read, update, delete). It'll need to be connected to a database to ensure entries are retained between visits to the app, and that changes are remembered. The app will make use of a mySQL database for this functionality, and will be developed using python and the Flask micro-framework. 
-Progress throughout the project will be tracked using the Jira Board, made for agile development. Different epics have been created based on different phases of the development, extrapolated from the above Use Cases and broken into tasks to facilitate the design of a project like this. 
+Progress throughout the project will be tracked using the Jira Board, made for agile development. Different epics have been created based on different phases of the development, extrapolated from the above Use Cases and broken into tasks to facilitate the design of a project like this. The completed board is here: https://jderbyshire.atlassian.net/jira/software/projects/CC5/boards/2/roadmap?shared=&atlOrigin=eyJpIjoiZGI3YWE5NThmNzM1NGY4NDkyNTdmMjU0ZjBiOTllMzciLCJwIjoiaiJ9
 
 ![jira_board](https://user-images.githubusercontent.com/100293943/171617985-7344a58e-e9a2-4e25-be84-92d09cd47587.jpg)
 
