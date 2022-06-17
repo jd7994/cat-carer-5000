@@ -6,24 +6,26 @@
 
 Index:
 -[User Stories](#user-stories)
-Acceptance Criteria
+
 -[Acceptance Criteria](#acceptance-criteria)
-Design
+
 -[Design](#design)
-Definition of Done
+
 -[Definition of Done](#def-of-done)
-Risk Assessment
+
 -[Risk Assessment](#risk-assessment)
-Implementation and Adaptation
+
 -[Implementation and Adaption](#implementation-and-adaptation)
-Unit Testing
+
 -[Unit Testing](#unit-testing)
-System Integration, Deployment, and Build
+
 -[System Integration, Development, and Build](#system-integration-deployment-and-build)
-Reflection
+
 -[Reflection](#reflection)
-Final Summary
+
 -[Final Summary(#final_summary)
+
+
 -----
 ## User Stories
 <details>
