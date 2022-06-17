@@ -9,6 +9,8 @@ Index:
 
 -[Acceptance Criteria](#acceptance-criteria)
 
+-[Initial Planning](#initial-planning)
+
 -[Design](#design)
 
 -[Definition of Done](#def-of-done)
@@ -65,7 +67,9 @@ So that I can know for sure my cats will be well fed.
   
 5. Given a user has access to the web app, they can easily adjust the app to show how much food they have, and whether that will satisfy their cats.   
 </details>
+
 ## Initial Planning
+
 We can now construct a plan for functionality of the project. It's clear from the user stories that the app needs to be CRUD capable (create, read, update, delete). It'll need to be connected to a database to ensure entries are retained between visits to the app, and that changes are remembered. The app will make use of a mySQL database for this functionality, and will be developed using python and the Flask micro-framework. 
 Progress throughout the project will be tracked using the Jira Board, made for agile development. Different epics have been created based on different phases of the development, extrapolated from the above Use Cases and broken into tasks to facilitate the design of a project like this. 
 
