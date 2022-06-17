@@ -127,7 +127,8 @@ It is at this point that I begin pushing to main.
 
 ## System Integration, Deployment, and Build
 I'll be integrating Jenkins to produce builds of this project, as well as automating testing on new commits. I planned in integrate the app through a pipeline project to accurately view the separate stages of the build. Because of the way Jenkins runs projects, to allow a build to "complete" while still running the app, I chose to use a linux systemd service file to create a service to handle the running of the app - this allows Jenkins to start (or restart) that process, as well as producing and running tests, performing maintenence and keeping a clean deployment space. That way, our Jenkins build will complete properly, but our app will run perpetually. 
-![systemd-service-file-on-deploy](https://user-images.githubusercontent.com/100293943/174304358-e34609e1-df51-4865-a66c-c0661debc05b.jpg)
+![systemd-service-file-on-deploy](https://user-images.githubusercontent.com/100293943/174312116-f9787ddf-f363-4f01-937f-babbe9139dc4.jpg)
+
 Above you can see the .service file has been fed everything it needs to work properly, our environment variables and the sources for the commands that are used to start it up.
 
 I also applied a webhook from our github repository, meaning that any time a new push is made to the repo, Jenkins will spin up a new build, performing tests (and returning those test results as a downloadable artifact), launching the systemd process on the deployment VM. It will do all of this automatically, following a jenkinsfile:  
