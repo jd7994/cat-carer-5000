@@ -35,7 +35,7 @@ pipeline {
                     echo "setting up database..."
                     ssh jenkins@app-deploy/cat-carer 'python3 create.py'
                     ssh jenkins@app-deploy/cat-carer 'sudo systemctl restart cat-carer'
-                    echo "ready!"
+                    echo "ready! app running"
                     '''
             }
         }
