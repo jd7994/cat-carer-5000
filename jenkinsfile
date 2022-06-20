@@ -25,6 +25,7 @@ pipeline {
                     echo "cleaning system..."
                     ssh jenkins@app-deploy/cat-carer 'sudo rm * -rf'
                     echo "repopulating system..."
+                    ssh jenkins@app-deploy 'mkdir cat-carer'
                     scp -r * jenkins@app-deploy/cat-carer:
                     ssh jenkins@app-deploy/cat-carer 'sudo rm -r venv'
                     echo "creating environment..."
