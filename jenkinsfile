@@ -23,18 +23,18 @@ pipeline {
                     ssh jenkins@app-deploy 'sudo apt update'
                     ssh jenkins@app-deploy 'sudo apt install python3 python3-pip python3-venv -y'
                     echo "cleaning system..."
-                    ssh jenkins@app-deploy 'rm * -r'
+                    ssh jenkins@app-deploy/cat-carer 'sudo rm * -rf'
                     echo "repopulating system..."
-                    scp -r * jenkins@app-deploy:
-                    ssh jenkins@app-deploy 'rm -r venv'
+                    scp -r * jenkins@app-deploy/cat-carer:
+                    ssh jenkins@app-deploy/cat-carer 'sudo rm -r venv'
                     echo "creating environment..."
-                    ssh jenkins@app-deploy 'python3 -m venv venv'
-                    ssh jenkins@app-deploy 'source venv/bin/activate'
+                    ssh jenkins@app-deploy/cat-carer 'python3 -m venv venv'
+                    ssh jenkins@app-deploy/cat-carer 'source venv/bin/activate'
                     echo "installing requirements"
-                    ssh jenkins@app-deploy 'venv/bin/pip3 install -r requirements.txt'
+                    ssh jenkins@app-deploy/cat-carer 'venv/bin/pip3 install -r requirements.txt'
                     echo "setting up database..."
-                    ssh jenkins@app-deploy 'python3 create.py'
-                    ssh jenkins@app-deploy 'sudo systemctl restart cat-carer'
+                    ssh jenkins@app-deploy/cat-carer 'python3 create.py'
+                    ssh jenkins@app-deploy/cat-carer 'sudo systemctl restart cat-carer'
                     echo "ready!"
                     '''
             }
