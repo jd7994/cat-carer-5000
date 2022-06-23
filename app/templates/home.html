@@ -1,0 +1,43 @@
+<html>
+    {% extends 'top.html' %}
+    {% block body %}
+    <body>
+        <h3>Here are the all the nice cats currently in your care:</h3>
+
+        {% if len(all_cats) == 0 %}
+    <p>You're not looking after any cats right now!</p>
+    <div>
+        <p>Maybe you'd like to <a href='{{url_for("add_cat")}}'> add a cat? </a></p>
+    </div>
+    {% else %}
+    <table>
+        <thead>
+          <tr>
+            <th> Name</th>
+            <th>| Fur Type</th>
+            <th>| Fur Colour</th>
+            <th>| Temprament</th>
+            <th>| Approximate Age</th>
+            <th>| Favourite Food</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for cat in all_cats %}
+          <tr>
+            <td><a href="likes/{{ cat.cat_id }}">{{cat.cat_name}}</td>
+            <td>{{cat.fur_type}}</td>
+            <td>{{cat.fur_colour}}</td>
+            <td>{{cat.temprament}}</td>
+            <td>{{cat.approx_age}}</td>
+            <td>{{cat.fav_foodbr.food}}</td>
+            <td><a href="/edit_cat/{{ cat.cat_id }}">Edit </a></td>
+            <td><a href='/delete_cat/{{ cat.cat_id }}'>Remove </a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+       </table>
+    {% endif %}
+    </body>
+    {% endblock body %}
+</html>
+

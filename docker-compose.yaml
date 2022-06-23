@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  sql:
+    build: ./db
+    container_name: mysql
+    environment: 
+      MYSQL_DATABASE: flask-db
+      MYSQL_ROOT_PASSWORD: ${SQL_PASS}
+    networks:
+      - cat-net
+  flask-app:
+    build: ./app
+    container_name: flask-app
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${SQL_PASS}
+    networks:
+      - cat-net
+    depends_on:
+      - "sql"
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - target: 80
+        published: 80
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf 
+    depends_on: 
+      - "flask-app"
+    networks:
+      - cat-net
+networks:
+  cat-net: 

@@ -1,0 +1,41 @@
+<html>
+    {% extends 'top.html' %}
+    {% block body %}
+    <body>
+        <br>
+        <br>
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>| Fur Type</th>
+            <th>| Fur Colour</th>
+            <th>| Temprament</th>
+            <th>| Approximate Age</th>
+            <th>| Favourite Food</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{cat.cat_name}}</td>
+            <td>{{cat.fur_type}}</td>
+            <td>{{cat.fur_colour}}</td>
+            <td>{{cat.temprament}}</td>
+            <td>{{cat.approx_age}}</td>
+            <td>{{cat.fav_foodbr.food}}</td>
+            </tr>
+        </tbody>
+    </table>
+        <br>
+        <br>  
+        <strong>{{cat.cat_name}}</strong> likes: <div></div>
+        {% for food in likes %}
+        {{ food }}
+        <br>
+        {% endfor %}
+        <br>
+        <a href="/edit_cat/{{ cat.cat_id }}"> Want to edit {{cat.cat_name}}'s entry?</a>
+      </p>
+    </body>
+    {% endblock body %}
+</html>

@@ -1,0 +1,27 @@
+<html>
+    {% extends 'top.html' %}
+    {% block body %}
+    <body>
+      <p>
+        <div class="form"></div>
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          {{ form.cat_name.label }} {{ form.cat_name }}
+          <br>
+          {{ form.fur_type.label }} {{ form.fur_type }}
+          <br>
+          {{ form.fur_colour.label }} {{ form.fur_colour }}
+          <br>
+          {{ form.temprament.label }} {{ form.temprament }}
+          <br>
+          {{ form.approx_age.label }} {{ form. approx_age }}
+          <br>
+          {{ form.fav_food.label }} {{ form.fav_food }}
+          <br>
+          {{ form.submit }}
+        </form>
+      </p>
+      
+    </body>
+    {% endblock body %}
+</html>

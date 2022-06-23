@@ -1,0 +1,32 @@
+<html>
+    {% extends 'top.html' %}
+    {% block body %}
+    <body>
+      <p>
+        What food does your cat like?
+        <div class="form"></div>
+        <form method="POST" action="">
+          {{ form.hidden_tag() }}
+          {{form.caul.label}}{{form.caul}}
+          <br>
+          {{form.pie.label}}{{form.pie}}
+          <br>
+          {{form.spid.label}}{{form.spid}}
+          <br>
+          {{form.chick.label}}{{form.chick}}
+          <br>
+          {{form.oink.label}}{{form.oink}}
+          <br>
+          {{form.pea.label}}{{form.pea}}
+          <br>
+          {{form.cake.label}}{{form.cake}}
+          <br>
+          {{form.cream.label}}{{form.cream}}
+          <div>
+            {{ form.submit }}
+          </div>
+        </form>
+      </p>
+    </body>
+    {% endblock body %}
+</html>
